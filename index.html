@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo app</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <span class="title">Tasks <span>List</span></span>
+        <div class="tasktitle"></div>
+        <div class="add-task">
+          <div class="circle addtask"><span>+</span></div>
+          <span class="text">Add Item</span>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <p class="no_item">No Items in the todo list</p>
+      <div class="box-container" style="display: none;">
+        
+      </div>
+    </div>
+
+    <div class="popup-main">
+      <div class="popup-container">
+        <div class="addtask-pop">
+          <div class="addtaskhead">
+            <div class="addnew">Add New List</div>
+          </div>
+          <input type="text" placeholder="Add New List" id="taskinput" />
+          
+          <div class="btn_bar">
+            <button class="addtaskbtn" onclick="createTask()">
+            Add
+            </button>
+            <button class="addtaskbtn" onclick="removePopup()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup-main-item">
+      <div class="popup-container-item">
+        <div class="addtask-pop-item">
+          <div class="addtaskhead">
+            <div class="addnew">Add New Item</div>
+          </div>
+          <input type="text" placeholder="Add New Item" id="taskinputItem" />
+          
+          <div class="btn_bar">
+            <button class="additembtn">
+            Add
+            </button>
+            <button class="addtaskbtn" onclick="removePopup()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="script.js"></script>
+  </body>
+</html>
