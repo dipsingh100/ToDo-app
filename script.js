@@ -17,6 +17,7 @@ function createTask() {
   }
 
   var userInput = document.querySelector("#taskinput").value;
+  document.querySelector("#taskinput").value = ""
   var boxContainer = document.querySelector(".box-container");
   document.querySelector(".no_item").style.display = "none";
   let checkFirstTask = document.querySelector(".box-container").style.display;
@@ -100,6 +101,7 @@ function addItem(idName) {
 //------------------add list Items----------------------
 function addLiItem(idName) {
   var inputItem = document.querySelector("#taskinputItem").value;
+  document.querySelector("#taskinputItem").value = ""
   var ulList = document.querySelector(`#${idName}`);
   var liTag = document.createElement("li");
   var buttonTag = document.createElement("button");
