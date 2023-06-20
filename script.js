@@ -10,21 +10,21 @@ function removePopup() {
 }
 
 function createTask() {
+  //when inside the selected Item and creating new task
   backOpt();
-
+  //Once creating new task then removing the selected class to display the home 
   if(document.querySelector(".selected") != null){
     document.querySelector(".selected").classList.remove("selected")
   }
 
   var userInput = document.querySelector("#taskinput").value;
   document.querySelector("#taskinput").value = ""
+
   var boxContainer = document.querySelector(".box-container");
-  document.querySelector(".no_item").style.display = "none";
-  let checkFirstTask = document.querySelector(".box-container").style.display;
-  if (checkFirstTask == "none") {
+  if (boxContainer.style.display == "none") {
     boxContainer.style.display = "flex";
   }
-
+  
   //creating elements
   var taskBoxDiv = document.createElement("div");
   var headingDiv = document.createElement("div");
@@ -36,7 +36,7 @@ function createTask() {
   var delImg = document.createElement("img");
   var addSpan = document.createElement("span");
   var hrTag = document.createElement("hr");
-
+  
   boxContainer.appendChild(taskBoxDiv);
   taskBoxDiv.appendChild(headingDiv);
   taskBoxDiv.appendChild(hrTag);
@@ -47,7 +47,7 @@ function createTask() {
   bottomTaskDiv.appendChild(circleAddDiv);
   circleDeleteDiv.appendChild(delImg);
   circleAddDiv.appendChild(addSpan);
-
+  
   //assigning classes
   taskBoxDiv.className = "task-box";
   headingDiv.className = "heading";
@@ -59,42 +59,47 @@ function createTask() {
   delImg.src = "delete.svg";
   delImg.alt = "delete";
   delImg.style.width = "16px";
-
+  
   addSpan.textContent = "+";
   headingDiv.textContent = userInput;
+  //creating id after converting the title into lowercase without spaces 
   ulTag.id = userInput.toLowerCase().replace(/\s/g, "");
-
-  //removing task
+  
+  //When click on Delete Button
   circleDeleteDiv.addEventListener("click", () => {
     taskBoxDiv.remove();
-    backOpt();
+    backOpt(); //if we are in particular task
+
+    //checking if there is no card remaining
     if (document.querySelector(".box-container").childElementCount == 0) {
       var taskTitle = document.querySelector(".tasktitle");
-      taskTitle.style.display = "none";
+      
       if (taskTitle.style.display == "none")
-        document.querySelector(".no_item").style.display = "block";
+      document.querySelector(".no_item").style.display = "block";
       document.querySelector(".box-container").style.display = "none";
     }
   });
-
+  
   //clicking on the Card
   headingDiv.addEventListener("click", () => {
     // const clonedElement = taskBoxDiv.cloneNode(true);
     selectedCard(headingDiv.innerHTML, taskBoxDiv);
     document.querySelector(".title").innerHTML = "< Back";
   });
-
+  
   //adding subtask
   circleAddDiv.setAttribute("onclick", `addItem("${ulTag.id}")`);
-  document.querySelector(".popup-main").style.display = "none";
+
+  document.querySelector(".no_item").style.display = "none";
+  removePopup();
 }
 
 //To open the popup and send the respective id
 function addItem(idName) {
   document.querySelector(".popup-main-item").style.display = "block";
   document
-    .querySelector(".additembtn")
-    .setAttribute("onclick", `addLiItem("${idName}")`);
+  .querySelector(".additembtn")
+  .setAttribute("onclick", `addLiItem("${idName}")`);
 }
 
 
@@ -123,6 +128,7 @@ function addLiItem(idName) {
 //------------------Card Selection---------------
 function selectedCard(heading, cardElemnt) {
   cardElemnt.classList.add("selected");
+  //hiding all other tasks
   document.querySelectorAll(".task-box").forEach((item) => {
     item.style.display = "none";
   });
@@ -134,13 +140,15 @@ function selectedCard(heading, cardElemnt) {
 
   //---------------Back button-----------------
   var title = document.querySelector(".title");
+  title.classList.add("selected-title");
+  
   title.addEventListener("click", () => {
     backOpt();
   });
   cardElemnt.classList.remove("selected");
 }
 
-
+//Back Button on Particular Item page
 function backOpt(){
   //changing the heading back to tasklist
   document.querySelector(".title").innerHTML = "Tasks <span>List</span>";
